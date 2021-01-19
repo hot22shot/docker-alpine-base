@@ -14,10 +14,17 @@ RUN apk add --update --no-cache \
     libmaxminddb-dev \
     nginx \
     tini \
+    tzdata \
     su-exec
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+RUN echo "Europe/Paris" > /etc/timezone
+ENV TZ Europe/Paris
+ENV LANG fr_FR.UTF-8
+ENV LANGUAGE fr_FR.UTF-8
+ENV LC_ALL fr_FR.UTF-8
 
 VOLUME /config
 
